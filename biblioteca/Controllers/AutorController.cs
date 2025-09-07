@@ -1,4 +1,5 @@
-﻿using biblioteca.Models;
+﻿using biblioteca.DTO.Autor;
+using biblioteca.Models;
 using biblioteca.Services.Autor;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -39,6 +40,28 @@ namespace biblioteca.Controllers
             return Ok(autor);
         }
 
+        [HttpPost("CriarAutor")]
+        public async Task<ActionResult<ResponseModel<List<AutorModel>>>> CriarAutor(AutorCriacaoDto autorCriacaoDto)
+        {
+            var autores = await _autorInterface.CriarAutor(autorCriacaoDto);
+            return Ok(autores);
+        }
+
+        [HttpPut ("Editar Autor")]
+
+        public async Task<ActionResult<ResponseModel<List<AutorModel>>>> EditarAutor(AutorEdicaoDto autorEdicaoDto)
+        {
+            var autores = await _autorInterface.EditarAutor(autorEdicaoDto);
+            return Ok(autores);
+        }
+
+        [HttpDelete("RemoverAutor")]
+
+        public async Task<ActionResult<ResponseModel<List<AutorModel>>>> ExcluirAutor(int idAutor)
+        {
+            var autores = await _autorInterface.ExcluirAutor(idAutor);
+            return Ok(autores);
+        }
 
     }
 }
