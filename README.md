@@ -5,7 +5,7 @@ O objetivo é simular o gerenciamento de uma biblioteca, com autores e livros, a
 
 🚀 Tecnologias utilizadas
 
-[.NET 8] (ajuste conforme versão usada)
+.NET 8
 
 Entity Framework Core
 
