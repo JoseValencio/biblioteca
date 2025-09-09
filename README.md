@@ -15,38 +15,6 @@ REST API
 
 Banco Mysql
 
-📂 Estrutura do Projeto
-biblioteca/
-│── Controllers/        # Controladores da API
-│   ├── AutorController.cs
-│   ├── LivroController.cs
-│
-│── Data/               # Contexto do banco de dados
-│   └── AppDbContext.cs
-│
-│── DTO/                # Objetos de transferência de dados
-│   ├── AutorCriacaoDto.cs
-│   ├── AutorEdicaoDto.cs
-│   ├── LivroCriacaoDto.cs
-│   ├── LivroEdicaoDto.cs
-│
-│── Models/             # Entidades do sistema
-│   ├── AutorModel.cs
-│   ├── LivroModel.cs
-│   └── ResponseModel.cs
-│
-│── Services/           # Regras de negócio
-│   ├── Autor/
-│   │   ├── AutorService.cs
-│   │   └── IAutorInterfaces.cs
-│   ├── Livro/
-│       ├── LivroService.cs
-│       └── ILivroInterfaces.cs
-│
-│── Migrations/         # Migrações do Entity Framework
-│── appsettings.json    # Configurações da aplicação
-│── Program.cs          # Configuração inicial
-
 📌 Funcionalidades
 
 Autores
