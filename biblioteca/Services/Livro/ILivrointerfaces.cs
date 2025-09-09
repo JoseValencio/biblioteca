@@ -9,5 +9,7 @@ namespace biblioteca.Services.Livro
         Task<ResponseModel<List<LivroModel>>> ListarLivros();
 
         Task<ResponseModel<List<LivroModel>>> CriarLivro(LivroCriacaoDto livroCriacaoDto);
+        Task<ResponseModel<List<LivroModel>>> EdicarLivro(LivroEdicaoDto livroEdicaoDto);
+        Task<ResponseModel<List<LivroModel>>> ExcluirLivro(int idLivro);
     }
 }

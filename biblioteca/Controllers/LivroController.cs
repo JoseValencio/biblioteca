@@ -28,13 +28,26 @@ namespace biblioteca.Controllers
             var livros = await _livroInterface.ListarLivros();
             return Ok(livros);
         }
-    
 
-    [HttpPost("CriarLivro")]
+        [HttpPost("CriarLivro")]
         public async Task<ActionResult<ResponseModel<List<LivroModel>>>> CriarLivro(LivroCriacaoDto livroCriacaoDto)
         {
             var livros = await _livroInterface.CriarLivro(livroCriacaoDto);
             return Ok(livros);
+        }    
+
+        [HttpPut("EditarLivro")]
+        public async Task<ActionResult<ResponseModel<List<LivroModel>>>> EditarLivro(LivroEdicaoDto livroEdicaoDto)
+        {
+            var livros = await _livroInterface.EdicarLivro(livroEdicaoDto);
+            return Ok(livros);
         }
-    }
+
+        [HttpDelete("ExcluirLivro/{idLivro}")]
+        public async Task<ActionResult<ResponseModel<List<LivroModel>>>> ExcluirLivro(int idLivro)
+        {
+            var livros = await _livroInterface.ExcluirLivro(idLivro);
+            return Ok(livros);
+        }
+    } 
 }

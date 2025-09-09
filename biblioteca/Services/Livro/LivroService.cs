@@ -19,7 +19,7 @@ namespace biblioteca.Services.Livro
             var resposta = new ResponseModel<LivroModel>();
             try
             {
-                var livro = _context.Livros.FirstOrDefault(livroBanco => livroBanco.Id == idLivro);
+                var livro = _context.Livros.Include(a => a.Autor).FirstOrDefault(livroBanco => livroBanco.Id == idLivro);
                 if (livro == null)
                 {
                     resposta.Mensagem = "Nenhum registro Localizado!";
@@ -86,6 +86,61 @@ namespace biblioteca.Services.Livro
                 return resposta;
             }
 
+        }
+
+        public async Task<ResponseModel<List<LivroModel>>> EdicarLivro(LivroEdicaoDto livroEdicaoDto)
+        {
+            var resposta = new ResponseModel<List<LivroModel>>();
+            try
+            {
+                var livro = _context.Livros.FirstOrDefaultAsync(l => l.Id == livroEdicaoDto.Id);
+                if (livro == null)
+                {
+                    resposta.Mensagem = "Nenhum registro Localizado!";
+                    return resposta;
+                }
+                livro.Result.Titulo = livroEdicaoDto.Titulo;
+                livro.Result.Autor = _context.Autores.FirstOrDefault(a => a.Id == livroEdicaoDto.AutorId);
+                _context.Livros.Update(livro.Result);
+                await _context.SaveChangesAsync();
+                resposta.Dados = await _context.Livros.ToListAsync();
+                resposta.Mensagem = "Livro Editado com Sucesso!";
+                return resposta;
+            }
+            catch (Exception ex)
+            {
+                resposta.Mensagem = ex.Message;
+                resposta.Status = false;
+                return resposta;
+            }
+        }
+
+        public async Task<ResponseModel<List<LivroModel>>> ExcluirLivro(int idLivro)
+        {
+            var resposta = new ResponseModel<List<LivroModel>>();
+            try
+            {
+                var livro = await _context.Livros.Include(a => a.Autor).FirstOrDefaultAsync(l => l.Id == idLivro);
+                if (livro == null)
+                {
+                    resposta.Mensagem = "Livro não encontrado para exclusão!";
+                    return resposta;
+                }
+
+                _context.Remove(livro);
+                await _context.SaveChangesAsync();
+                resposta.Dados = await _context.Livros.ToListAsync();
+                resposta.Mensagem = "Livro removido com sucesso!";
+
+                return resposta;
+
+
+            }catch (Exception ex)
+            {
+                resposta.Mensagem = ex.Message;
+                resposta.Status = false;
+                return resposta;
+            }
         }
     }
 }
